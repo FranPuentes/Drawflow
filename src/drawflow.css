@@ -22,7 +22,7 @@
   display: flex;
   align-items: center;
   position: absolute;
-  background: silver;
+  background: #6699ff;
   width: 160px;
   min-height: 40px;
   border-radius:4px;
@@ -33,7 +33,7 @@
 }
 
 .drawflow .drawflow-node.selected {
-  background: red;
+  background: #0044cc;
 }
 .drawflow .drawflow-node:hover {
   cursor: move;
@@ -64,7 +64,7 @@
 .drawflow .drawflow-node .input {
   left: -27px;
   top: 2px;
-  background: yellow;
+  background: #e6e600;
 }
 .drawflow .drawflow-node .output {
   right: -3px;
