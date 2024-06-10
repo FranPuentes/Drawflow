@@ -1,4 +1,5 @@
 export default class Drawflow {
+
   constructor(container, render = null, parent = null) {
     this.events = {};
     this.container = container;
@@ -69,15 +70,22 @@ export default class Drawflow {
 
     /* Context Menu */
     this.container.addEventListener('contextmenu', this.contextmenu.bind(this));
+    
     /* Delete */
     this.container.addEventListener('keydown', this.key.bind(this));
 
     /* Zoom Mouse */
     this.container.addEventListener('wheel', this.zoom_enter.bind(this));
+    
     /* Update data Nodes */
     this.container.addEventListener('input', this.updateNodeValue.bind(this));
 
     this.container.addEventListener('dblclick', this.dblclick.bind(this));
+    
+    /* Drop data */
+    this.container.addEventListener('dragover', (event)=> { event.preventDefault(); });
+    this.container.addEventListener('drop', this.drop_handler.bind(this));
+    
     /* Mobile zoom */
     this.container.onpointerdown = this.pointerdown_handler.bind(this);
     this.container.onpointermove = this.pointermove_handler.bind(this);
@@ -87,6 +95,21 @@ export default class Drawflow {
     this.container.onpointerleave = this.pointerup_handler.bind(this);
 
     this.load();
+  }
+
+  drop_handler(ev)
+  {
+   event.preventDefault();
+   const data = event.dataTransfer.getData('text/plain');
+   const pos_x = event.clientX;
+   const pos_y = event.clientY;
+    
+   // Lógica personalizada que deseas ejecutar cuando se suelte algo en el editor
+   console.log(`Elemento soltado en la posición X: ${pos_x}, Y: ${pos_y}`);
+   console.log(`Datos transferidos: ${data}`);
+
+   // Ejemplo de agregar un nodo en la posición soltada
+   this.addNode('NodeName', 1, 1, pos_x, pos_y, '', {}, 'htmlContent');  
   }
 
   /* Mobile zoom */
